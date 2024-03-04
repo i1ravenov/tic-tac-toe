@@ -38,11 +38,8 @@ function checkForWin(cell, turn) {
         }
         let isEnd = true;
         isEnd &&= cells[comb[0]].classList.contains(turn);
-        console.log(isEnd);
         isEnd &&= cells[comb[1]].classList.contains(turn);
-        console.log(isEnd);
         isEnd &&= cells[comb[2]].classList.contains(turn);
-        console.log(isEnd);
         if (isEnd) {
             return true;
         }
