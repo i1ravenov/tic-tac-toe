@@ -13,14 +13,16 @@ const WINS = [
     [0, 4, 8],
     [6, 4, 2],
 ];
+const x = "x";
+const o = "o";
 
 startGame();
 
 function startGame() {
     isRunning = true;
     cells.forEach(cell => {
-        cell.classList.remove('x');
-        cell.classList.remove('o');
+        cell.classList.remove(x);
+        cell.classList.remove(o);
         cell.removeEventListener('click', makeMove);
         cell.addEventListener("click", makeMove);
     });
@@ -48,9 +50,14 @@ function checkForWin(cell, turn) {
     return false;
 }
 
+function checkForDraw() {
+    const arr = Array.from(cells);
+    return arr.every((c) => c.classList.contains(x) || c.classList.contains(o));
+}
+
 function makeMove(e) {
     const cell = e.target;
-    const currTurn = turnX ? "x" : "o";
+    const currTurn = turnX ? x : o;
     cell.classList.add(currTurn);
     turnX = !turnX;
     if (checkForWin(cell, currTurn)) {
@@ -59,7 +66,7 @@ function makeMove(e) {
         winningMessage.style.display = "flex";
     } else if (checkForDraw()) {
         isRunning = false;
-        winningMessageTextElement.textContent = "Draw!";
+        winningMessageTextElement.textContent = "draw!";
         winningMessage.style.display = "flex";
     }
 }
